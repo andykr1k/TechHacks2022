@@ -32,19 +32,18 @@ function App() {
       <div class="sectionHolder">
         {user ? <GeneralChat /> : <SignInPage /> }
       </div>
-      {user ? <div></div> : <SignIn />}
       <Footer />
     </div>
   )
 }
 
-function SignIn() {
+export function SignIn() {
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   }
   return (
-    <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0 bg-black m-2 p-5 bg-opacity-10 rounded-md'>
+    <motion.div whileHover={{scale: 1.2}} className='bg-black m-2 p-5 bg-opacity-10 rounded-md'>
       <button className='text-white' onClick={signInWithGoogle}>Sign In With Google</button>
     </motion.div>
   )
