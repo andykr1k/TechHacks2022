@@ -1,5 +1,6 @@
 import * as React from 'react';
 import logo from '../assets/rbanimoji.png'
+
 function Footer() {
   return (
     <div className='flex absolute justify-center items-center bottom-0'>
