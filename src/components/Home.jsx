@@ -3,7 +3,7 @@ import logo from '../assets/rbanimoji.png'
 
 function Home() {
   return (
-    <div className='grid place-items-center h-screen bg-slate-400'>
+    <div className='grid place-items-center h-screen'>
         <img src={logo} alt={"Logo"} />
     </div>
   )

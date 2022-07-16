@@ -1,14 +1,15 @@
 import * as React from 'react';
-import {Header, Footer, Home, SignInPage, GeneralChat} from './components';
+import {Home, SignInPage, GeneralChat, SettingsPage, Page} from './components';
 import firebase from 'firebase/compat/app';
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { motion } from "framer-motion";
 import logoutLogo from './assets/logout.png'
+import Dropdown from 'react-bootstrap/Dropdown';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 firebase.initializeApp({
   apiKey: "AIzaSyC_-wGkDys7bx9DuIZFkoBjVLuozY21fqU",
@@ -26,27 +27,17 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <BrowserRouter>
       <div>
-      <Header />
-      <div >
-        {user ? <SignOut /> : <div></div> }
+        <Header />
+        <div >
+          {user ? <SignOut /> : <div></div> }
+        </div>
+        <div class="sectionHolder">
+          {user ? <div></div> : <SignInPage /> }
+          {user ? <ProfilePage /> : <div></div> }
+        </div>
+        {user ? <Footer /> : <div></div> }
       </div>
-      <div class="sectionHolder">
-      {user ? 
-      <div>
-        <Routes>
-          <Route path="/" element={<GeneralChat />}/>
-          <Route path="/" element={<ProfilePage />}/>
-        </Routes>
-      </div>
-        : 
-        <SignInPage /> 
-      }
-      </div>
-      <Footer />
-    </div>
-    </BrowserRouter>
   )
 }
 
@@ -125,14 +116,47 @@ function ChatMessage(props) {
   )
 }
 
+function Header() {
+  return (
+    <div>
+        <div className='grid absolute m-5 top-0 left-0 text-white bg-black bg-opacity-10 p-3 rounded-md text-xs'>
+          <motion.a href="/" whileHover={{scale:1.2}} className='text-xs'>The Daily</motion.a>
+        </div>
+        <div className='grid absolute m-5 top-0 right-0 text-white bg-black p-2 bg-opacity-10 rounded-md invisible md:visible'>
+            <motion.a href="/chat" whileHover={{scale:1.2, rotate:10, color: 'blue'}} className='m-auto'>Chat</motion.a>
+            <motion.a href="/profile" whileHover={{scale:1.2, rotate:10, color: 'blue'}} className='m-auto mt-5'>Profile</motion.a>
+            <motion.a href="/settings" whileHover={{scale:1.2, rotate:10, color: 'blue'}} className='m-auto mt-5'>Settings</motion.a>
+        </div>
+        <Dropdown className='grid absolute m-5 top-0 right-0 text-white bg-black p-3 bg-opacity-10 rounded-md visible md:invisible text-xs' id="dropdown-basic-button">
+          <Dropdown.Toggle> Menu </Dropdown.Toggle>
+          <Dropdown.Menu className='grid'>
+            <Dropdown.Item href="/chat" className='mt-3' active>Chat</Dropdown.Item>
+            <Dropdown.Item href="/profile" className='mt-3'>Profile</Dropdown.Item>
+            <Dropdown.Item href="/settings" className='mt-3'>Settings</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+    </div>
+  )
+}
+
+function Footer() {
+  return (
+    <div className='flex absolute justify-center items-center bottom-0 m-2'>
+        <img whileHover={{scale:1.2}} className='w-10 rounded-full' src={auth.currentUser.photoURL} />
+    </div>
+  )
+}
+
 function ProfilePage() {
   return (
     <div className='h-screen'>
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center text-center'>
         <div>
           <h1 className='text-white text-2xl top-0 m-5'> Profile </h1>
-            <div className='grid place-items-center'>
-            <h1> ${auth.currentUser.displayName} </h1>
+            <div className='grid place-items-center mt-10'>
+              <img className='rounded-full' src={auth.currentUser.photoURL} />
+              <h1 className='mt-5 font-extrabold'> {auth.currentUser.displayName.toUpperCase()} </h1>
+              <h2> {auth.currentUser.email} </h2>
             </div>
         </div>
       </div>
