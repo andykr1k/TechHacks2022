@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {Header, Footer, Home, SignInPage, CreateEntryPage} from './components';
+import {Header, Footer, Home, SignInPage, GeneralChat} from './components';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionDate } from 'react-firebase-hooks/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { motion } from "framer-motion";
 import './App.css';
 
@@ -29,8 +29,8 @@ function App() {
       <div >
         {user ? <SignOut /> : <div></div> }
       </div>
-      <div >
-        {user ? <CreateEntryPage /> : <SignInPage /> }
+      <div class="sectionHolder">
+        {user ? <GeneralChat /> : <SignInPage /> }
       </div>
       {user ? <div></div> : <SignIn />}
       <Footer />
@@ -44,7 +44,7 @@ function SignIn() {
     auth.signInWithPopup(provider);
   }
   return (
-    <motion.div whileHover={{scale: 1.2}} class="page" className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2 bg-opacity-10'>
+    <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0 bg-black m-2 p-5 bg-opacity-10 rounded-md'>
       <button className='text-white' onClick={signInWithGoogle}>Sign In With Google</button>
     </motion.div>
   )
@@ -52,34 +52,57 @@ function SignIn() {
 
 function SignOut() {
   return auth.currentUser && (
-    <motion.div whileHover={{scale: 1.2}} class="page" className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2 bg-opacity-10'>
+    <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0 bg-black m-2 p-5 bg-opacity-10 rounded-md'>
       <button className='text-white' onClick={() => auth.signOut()}>Sign Out</button>
     </motion.div>
   )
 }
 
-function ChatRoom(){
+export function ChatRoom(){
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
-  const [messages] = useCollectionDate(query, {idField: 'id'});
+  const [messages] = useCollectionData(query, {idField: 'id'});
+  const [formValue, setFormValue] = React.useState('');
+
+  const sendMessage = async(e) => {
+    e.preventDefault();
+
+    const { uid, photoUrl } = auth.currentUser;
+
+    await messagesRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoUrl: auth.currentUser.photoURL
+    })
+
+    setFormValue('');
+  }
   
   return (
     <>
+    <div className='absolute bottom-0'>
       <div>
-      {messages && messages.map(msg=> <ChatMessage key={msg.id} message={msg}/>)}
+        {messages && messages.map(msg=> <ChatMessage key={msg.id} message={msg}/>)}
       </div>
+
+      <form onSubmit={sendMessage}>
+      <input className='m-2 bg-black bg-opacity-10 p-2' value={formValue} onChange={(e)=> setFormValue(e.target.value)} placeholder="Send Message"/>
+      <button className='m-2 font-extrabold bg-black bg-opacity-10 p-2' type="submit">Send</button>
+      </form>
+    </div>
     </>
   )
 }
 
 function ChatMessage(props) {
-  const { text, uid } = props.message;
+  const { text, uid, photoUrl } = props.message;
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   return (
-    <div className={`message ${messageClass}`}>
-      <img src={photoUrl} />
-      <p>{text}</p>
+    <div class="message">
+      <motion.img whileHover={{scale:3}} className='w-5 m-1 rounded-md' src={photoUrl} />
+      <p className='text-white m-1'>{text}</p>
     </div>
   )
 }
