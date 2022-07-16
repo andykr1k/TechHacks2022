@@ -88,7 +88,7 @@ export function ChatRoom(){
   return (
     <>
     <div className='absolute bottom-0'>
-      <div>
+      <div className=''>
         {messages && messages.map(msg=> <ChatMessage key={msg.id} message={msg}/>)}
       </div>
 

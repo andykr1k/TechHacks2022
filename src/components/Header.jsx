@@ -6,10 +6,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 function Header() {
   return (
     <div>
-        <div className='flex absolute top-0 text-white '>
-          <motion.p whileHover={{scale:1.2}}className='bg-black m-5 p-2 bg-opacity-10 rounded-md'>Daily</motion.p>
+        <div className='grid absolute m-5 top-0 left-0 text-white bg-black bg-opacity-10 p-3 rounded-md text-xs'>
+          <motion.p whileHover={{scale:1.2}}className='text-xs'>The Daily</motion.p>
         </div>
-        <div class="page"  className='grid absolute m-5 top-0 right-0 text-white bg-black p-5 bg-opacity-10 rounded-md invisible md:visible'>
+        <div class="page"  className='grid absolute m-5 top-0 right-0 text-white bg-black p-2 bg-opacity-10 rounded-md invisible md:visible'>
             <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto'>Dashboard</motion.p>
             <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto mt-5'>Journal</motion.p>
             <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto mt-5'>Profile</motion.p>
