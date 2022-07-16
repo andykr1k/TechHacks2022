@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    font-family: 'Open Sans', sans-serif;
+    background-image: linear-gradient(to bottom right, #fc0345,#fc03b1,#4a03fc);
+    background-position:center;
+    z-index: -1;
+}

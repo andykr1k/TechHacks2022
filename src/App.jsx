@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {Header, Footer, Home, SignInPage} from './components';
+import {Header, Footer, Home, SignInPage, CreateEntryPage} from './components';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import './App.css';
 
 firebase.initializeApp({
@@ -29,9 +29,9 @@ function App() {
         {user ? <SignOut /> : <div></div> }
       </div>
       <div >
-        {user ? <div></div>: <SignInPage /> }
+        {user ? <CreateEntryPage />: <SignInPage /> }
       </div>
-      {user ? <Home /> : <SignIn />}
+      {user ? <div></div> : <SignIn />}
       <Footer />
     </div>
   )
@@ -44,7 +44,7 @@ function SignIn() {
   }
   return (
     <motion.div whileHover={{scale: 1.2}}  className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2'>
-      <button className='text-red-600' onClick={signInWithGoogle}>Sign In With Google</button>
+      <button className='text-white opacity-10' onClick={signInWithGoogle}>Sign In With Google</button>
     </motion.div>
   )
 }
@@ -52,7 +52,7 @@ function SignIn() {
 function SignOut() {
   return auth.currentUser && (
     <motion.div whileHover={{scale: 1.2}}  className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2'>
-      <button className='text-red-600' onClick={() => auth.signOut()}>Sign Out</button>
+      <button className='text-white opacity-5' onClick={() => auth.signOut()}>Sign Out</button>
     </motion.div>
   )
 }
