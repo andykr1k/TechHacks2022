@@ -43,16 +43,16 @@ function SignIn() {
     auth.signInWithPopup(provider);
   }
   return (
-    <motion.div whileHover={{scale: 1.2}}  className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2'>
-      <button className='text-white opacity-10' onClick={signInWithGoogle}>Sign In With Google</button>
+    <motion.div whileHover={{scale: 1.2}} class="page" className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2 bg-opacity-10'>
+      <button className='text-white' onClick={signInWithGoogle}>Sign In With Google</button>
     </motion.div>
   )
 }
 
 function SignOut() {
   return auth.currentUser && (
-    <motion.div whileHover={{scale: 1.2}}  className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2'>
-      <button className='text-white opacity-5' onClick={() => auth.signOut()}>Sign Out</button>
+    <motion.div whileHover={{scale: 1.2}} class="page" className='flex absolute justify-center items-center bottom-0 right-0 m-5 bg-black rounded-md p-2 bg-opacity-10'>
+      <button className='text-white' onClick={() => auth.signOut()}>Sign Out</button>
     </motion.div>
   )
 }
