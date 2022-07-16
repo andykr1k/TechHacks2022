@@ -34,7 +34,7 @@ function App() {
         </div>
         <div class="sectionHolder">
           {user ? <div></div> : <SignInPage /> }
-          {user ? <ProfilePage /> : <div></div> }
+          {user ? <GeneralChat /> : <div></div> }
         </div>
         {user ? <Footer /> : <div></div> }
       </div>
