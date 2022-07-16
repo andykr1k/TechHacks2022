@@ -6,6 +6,7 @@ import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { motion } from "framer-motion";
+import logoutLogo from './assets/logout.png'
 import './App.css';
 
 firebase.initializeApp({
@@ -51,9 +52,15 @@ export function SignIn() {
 
 function SignOut() {
   return auth.currentUser && (
-    <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0 bg-black m-2 p-5 bg-opacity-10 rounded-md'>
+    <div class='signingout'>
+      <motion.div whileHover={{scale: 1.2}} className='absolute bottom-0 right-0 bg-black m-2 p-2 bg-opacity-10 rounded-md visible md:invisible'>
+      <img className='text-white' src={logoutLogo} onClick={() => auth.signOut()}/>
+    </motion.div>
+    <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0  bg-black m-2 p-2 bg-opacity-10 rounded-md invisible md:visible'>
       <button className='text-white' onClick={() => auth.signOut()}>Sign Out</button>
     </motion.div>
+    </div>
+
   )
 }
 
@@ -86,8 +93,8 @@ export function ChatRoom(){
       </div>
 
       <form onSubmit={sendMessage}>
-      <input className='m-2 bg-black bg-opacity-10 p-2' value={formValue} onChange={(e)=> setFormValue(e.target.value)} placeholder="Send Message"/>
-      <button className='m-2 font-extrabold bg-black bg-opacity-10 p-2' type="submit">Send</button>
+      <input className=' bg-black m-2 p-2 bg-opacity-10 rounded-md' value={formValue} onChange={(e)=> setFormValue(e.target.value)} placeholder="Send Message"/>
+      <button className=' bg-black m-2 p-2 bg-opacity-10 rounded-md font-bold' type="submit">Send</button>
       </form>
     </div>
     </>
