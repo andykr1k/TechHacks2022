@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Header, Footer, Home, SignInPage, GeneralChat} from './components';
 import firebase from 'firebase/compat/app';
+import { Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -25,16 +26,27 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div>
+    <BrowserRouter>
+      <div>
       <Header />
       <div >
         {user ? <SignOut /> : <div></div> }
       </div>
       <div class="sectionHolder">
-        {user ? <GeneralChat /> : <SignInPage /> }
+      {user ? 
+      <div>
+        <Routes>
+          <Route path="/" element={<GeneralChat />}/>
+          <Route path="/" element={<ProfilePage />}/>
+        </Routes>
+      </div>
+        : 
+        <SignInPage /> 
+      }
       </div>
       <Footer />
     </div>
+    </BrowserRouter>
   )
 }
 
@@ -111,6 +123,21 @@ function ChatMessage(props) {
       <p className='text-white m-1'>{text}</p>
     </div>
   )
+}
+
+function ProfilePage() {
+  return (
+    <div className='h-screen'>
+      <div className='flex justify-center items-center'>
+        <div>
+          <h1 className='text-white text-2xl top-0 m-5'> Profile </h1>
+            <div className='grid place-items-center'>
+            <h1> ${auth.currentUser.displayName} </h1>
+            </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App;

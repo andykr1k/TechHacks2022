@@ -12,14 +12,14 @@ function Header() {
         <div class="page"  className='grid absolute m-5 top-0 right-0 text-white bg-black p-2 bg-opacity-10 rounded-md invisible md:visible'>
             <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto'>Dashboard</motion.p>
             <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto mt-5'>Journal</motion.p>
-            <motion.p whileHover={{scale:1.2, rotate:10}}className='m-auto mt-5'>Profile</motion.p>
+            <motion.a href="/" whileHover={{scale:1.2, rotate:10}}className='m-auto mt-5'>Profile</motion.a>
         </div>
         <Dropdown className='grid absolute m-5 top-0 right-0 text-white bg-black p-3 bg-opacity-10 rounded-md visible md:invisible text-xs' id="dropdown-basic-button">
           <Dropdown.Toggle id="dropdown-autoclose-true"> Menu </Dropdown.Toggle>
           <Dropdown.Menu className='grid'>
-          <Dropdown.Item className='mt-3' href="#/action-1" active>Home</Dropdown.Item>
-            <Dropdown.Item className='mt-3' href="#/action-2">Profile</Dropdown.Item>
-            <Dropdown.Item className='mt-3' href="#/action-3">Settings</Dropdown.Item>
+          <Dropdown.Item className='mt-3' href="/" active>Home</Dropdown.Item>
+            <Dropdown.Item className='mt-3' href="/">Profile</Dropdown.Item>
+            <Dropdown.Item className='mt-3' href="/action-3">Settings</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
     </div>
