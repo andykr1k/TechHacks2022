@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Home, SignInPage, GeneralChat, SettingsPage, Page} from './components';
+import {Home, SignInPage, GeneralChat, SettingsPage} from './components';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import logoutLogo from './assets/logout.png'
 import Dropdown from 'react-bootstrap/Dropdown';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 firebase.initializeApp({
   apiKey: "AIzaSyC_-wGkDys7bx9DuIZFkoBjVLuozY21fqU",
@@ -27,6 +27,7 @@ const firestore = firebase.firestore();
 function App() {
   const [user] = useAuthState(auth);
   return (
+    <BrowserRouter>
       <div>
         <Header />
         <div >
@@ -34,10 +35,18 @@ function App() {
         </div>
         <div class="sectionHolder">
           {user ? <div></div> : <SignInPage /> }
-          {user ? <GeneralChat /> : <div></div> }
+          {user ? 
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/chat" element={<GeneralChat />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Routes>
+          : <div></div> }
         </div>
         {user ? <Footer /> : <div></div> }
       </div>
+    </BrowserRouter>
   )
 }
 

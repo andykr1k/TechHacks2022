@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import logo from '../assets/rbanimoji.png'
 
 function Home() {
   return (
-    <div className='grid place-items-center h-screen'>
+      <div className='grid place-items-center h-screen'>
         <img src={logo} alt={"Logo"} />
-    </div>
+      </div>
   )
 }
 
