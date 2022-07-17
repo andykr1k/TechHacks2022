@@ -25,8 +25,10 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function App() {
+
   const [user] = useAuthState(auth);
   const dummy = React.useRef();
+
   return (
     <BrowserRouter>
       <div>
@@ -39,7 +41,7 @@ function App() {
           <div class="sectionHolder">
             {user ? 
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<GeneralChat />} />
               <Route path="/chat" element={<GeneralChat />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/settings" element={<SettingsPage />} />
