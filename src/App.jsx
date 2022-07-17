@@ -71,7 +71,7 @@ export function SignIn() {
 function SignOut() {
   return auth.currentUser && (
     <div class='signingout'>
-      <motion.div whileHover={{scale: 1.2}} className='absolute bottom-0 right-0 bg-black m-5 p-2 bg-opacity-10 rounded-md visible md:invisible'>
+      <motion.div whileHover={{scale: 1.2}} className='absolute top-10 left-0 bg-black m-5 mt-7 p-2 bg-opacity-10 rounded-md visible md:invisible'>
       <img className='text-white' src={logoutLogo} onClick={() => auth.signOut()}/>
     </motion.div>
     <motion.div whileHover={{scale: 1.2}} className='flex absolute bottom-0 right-0  bg-black m-5 p-2 bg-opacity-10 rounded-md invisible md:visible'>
@@ -106,14 +106,14 @@ export function ChatRoom(){
   
   return (
     <>
-    <div className='absolute bottom-0 md:m-5'>
+    <div className='grid absolute justify-center items-center bottom-0 m-3'>
       <div className=''>
         {messages && messages.map(msg=> <ChatMessage key={msg.id} message={msg}/>)}
       </div>
 
       <form className='flex' onSubmit={sendMessage}>
         <input className=' bg-black m-2 p-2 bg-opacity-10 rounded-md' value={formValue} onChange={(e)=> setFormValue(e.target.value)} placeholder="Send Message"/>
-        <button className=' bg-black m-2 p-2 bg-opacity-10 rounded-md font-bold' type="submit">Send</button>
+        <motion.button whileHover={{scale:1.2}} className=' bg-black m-2 p-2 bg-opacity-10 rounded-md font-bold' type="submit">Send</motion.button>
       </form>
     </div>
     </>
