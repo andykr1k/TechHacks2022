@@ -144,9 +144,9 @@ function Header() {
             <motion.a href="/settings" whileHover={{scale:1.2, color: 'blue'}} className='m-auto mt-5'>Settings</motion.a>
         </div>
         <div className='grid absolute m-5 top-0 right-0 text-white bg-black p-3 bg-opacity-10 rounded-md visible md:invisible text-xs'>
-          <Dropdown  id="dropdown-basic-button">
+          <Dropdown>
             <Dropdown.Toggle> Menu </Dropdown.Toggle>
-            <Dropdown.Menu className='grid text-white bg-black bg-opacity-10 rounded-md visible md:invisible text-xs'>
+            <Dropdown.Menu className='grid absolute text-white bg-black bg-opacity-10 p-3 rounded-md visible md:invisible text-xs'>
               <Dropdown.Item href="/chat" className='' >Chat</Dropdown.Item>
               <Dropdown.Item href="/profile" className=''>Profile</Dropdown.Item> 
               <Dropdown.Item href="/settings" className=''>Settings</Dropdown.Item>
