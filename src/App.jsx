@@ -39,6 +39,7 @@ function App() {
         </div>
         <div className=''>
           <div class="sectionHolder">
+          
             {user ? 
             <Routes>
               <Route path="/" element={<GeneralChat />} />
