@@ -10,6 +10,7 @@
 <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/andykr1k/TechHacks2022?&style=for-the-badge"/>
 <img alt="GitHub Commit Activity (Week)" src="https://img.shields.io/github/commit-activity/w/andykr1k/TechHacks2022?&style=for-the-badge"/>
 </div>
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b856a496-7aff-4b8f-8bba-30cdf7ddd05c/deploy-status)](https://app.netlify.com/sites/techhacks2022/deploys)
 
 # References
