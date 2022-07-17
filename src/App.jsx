@@ -39,10 +39,9 @@ function App() {
         </div>
         <div className=''>
           <div class="sectionHolder">
-          
             {user ? 
             <Routes>
-              <Route path="/" element={<GeneralChat />} />
+              <Route path="/" element={<Home />} />
               <Route path="/chat" element={<GeneralChat />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/settings" element={<SettingsPage />} />
