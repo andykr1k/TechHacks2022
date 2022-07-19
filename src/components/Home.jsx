@@ -10,7 +10,7 @@ function Home() {
             <div>
               <h1 className='text-white text-2xl top-0 m-5'> Home </h1>
                 <div className='grid place-items-center mt-10'>
-                  
+                  <h1 className='text-white' >Welcome to The Universal Chatrooms</h1>
                 </div>
             </div>
           </div>

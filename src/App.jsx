@@ -39,15 +39,17 @@ function App() {
         </div>
         <div className=''>
           <div class="sectionHolder">
-            {user ? 
+            {user 
+            ? 
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/chat" element={<GeneralChat />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/settings" element={<SettingsPage />} />
-            </Routes>
-            : <div></div> }
-            {user ? <div></div> : <SignInPage /> }
+            </Routes> 
+            : 
+            <SignInPage /> 
+            }
           </div>
         </div>
         {user ? <Footer /> : <div></div> }
