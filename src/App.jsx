@@ -11,7 +11,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-firebase.initializeApp({
+export const firebaseConfig = {
   apiKey: "AIzaSyC_-wGkDys7bx9DuIZFkoBjVLuozY21fqU",
   authDomain: "techhacks2022-b50d6.firebaseapp.com",
   projectId: "techhacks2022-b50d6",
@@ -19,10 +19,12 @@ firebase.initializeApp({
   messagingSenderId: "1031309348797",
   appId: "1:1031309348797:web:b0d279c8986216b1ea8cd4",
   measurementId: "G-97GJEFLE9E"
-});
+};
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+export const app = firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 function App() {
 
